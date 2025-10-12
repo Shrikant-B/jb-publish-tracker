@@ -216,4 +216,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 **Made with ❤️ for JetBrains Plugin Developers**
-**Support my work! [Ko-fi me](https://ko-fi.com/shrikant007)**
+- Support my work! [Ko-fi me](https://ko-fi.com/shrikant007)**
