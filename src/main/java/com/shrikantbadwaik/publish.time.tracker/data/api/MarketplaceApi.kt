@@ -27,7 +27,7 @@ internal class MarketplaceApiImpl(
         println("[MarketplaceApi] Fetching updates for plugin: $pluginId")
         println("[MarketplaceApi] URL: $url")
         println("[MarketplaceApi] Auth Token: ${if (apiToken != null) "Present" else "Not set"}")
-        
+
         val httpResponse = client.get(urlString = url) {
             accept(ContentType.Application.Json)
             // Add authentication if token is available
@@ -35,17 +35,17 @@ internal class MarketplaceApiImpl(
                 header("Authorization", "Bearer $it")
             }
         }
-        
+
         // Get raw JSON text and manually parse to List
         val jsonText = httpResponse.bodyAsText()
         println("[MarketplaceApi] Response JSON length: ${jsonText.length}")
-        
-        val json = Json { 
+
+        val json = Json {
             ignoreUnknownKeys = true
             isLenient = true
         }
         val response: List<MarketplaceUpdate> = json.decodeFromString(jsonText)
-        
+
         println("[MarketplaceApi] Received ${response.size} updates")
         return response
     }

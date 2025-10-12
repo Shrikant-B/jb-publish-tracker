@@ -11,7 +11,7 @@ import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class PublishSettingsConfigurable: Configurable {
+class PublishSettingsConfigurable : Configurable {
     private val panel = JPanel()
     private val tokenField = JBTextField()
     private val pluginsList = JBList<String>()

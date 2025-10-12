@@ -15,7 +15,7 @@ internal class RepositoryImpl(
     private val apiFactory: () -> MarketplaceApi
 ) : Repository {
     private val ioDispatcher = AppExecutorUtil.getAppExecutorService().asCoroutineDispatcher()
-    
+
     override suspend fun fetchStatus(pluginId: String): PluginStatus {
         return withContext(ioDispatcher) {
             val api = apiFactory()
@@ -25,15 +25,15 @@ internal class RepositoryImpl(
 
                 val verificationStage = VerificationStage.fromApiStatus(
                     status = null,
-                    approve = latest?.approve, 
+                    approve = latest?.approve,
                     listed = latest?.listed
                 )
-                
+
                 val status = verificationStage.name.lowercase()
                 val version = latest?.version.orEmpty()
                 val displayName = latest?.author?.name ?: pluginId
                 val timestamp = latest?.getTimestamp()
-                
+
                 PluginStatus(
                     pluginId = pluginId,
                     displayName = displayName,
@@ -60,7 +60,7 @@ internal class RepositoryImpl(
             }
         }
     }
-    
+
     override fun fetchStatusSync(pluginId: String): PluginStatus {
         return runBlocking(ioDispatcher) {
             fetchStatus(pluginId)

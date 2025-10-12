@@ -31,3 +31,13 @@ replay_pid*
 .gradle/
 build/
 bin/
+
+# Test reports
+*.html
+*.xml
+!config/detekt/detekt-config.yml
+!config/detekt/baseline.xml
+
+# OS specific
+.DS_Store
+Thumbs.db

@@ -36,27 +36,26 @@ class StatusFetcher(
             override fun run(indicator: ProgressIndicator) {
                 indicator.text = "Fetching plugin statuses..."
                 indicator.fraction = 0.0
-                
+
                 val results = mutableListOf<PluginStatus>()
                 val totalPlugins = pluginIds.size
-                
+
                 for ((index, pid) in pluginIds.withIndex()) {
                     if (indicator.isCanceled) {
                         return
                     }
-                    
+
                     indicator.text = "Checking plugin: $pid"
                     indicator.fraction = index.toDouble() / totalPlugins
-                    
+
                     val duration = measureTimeMillis {
                         try {
                             // Now using real API call with synchronous method
                             val s = repo.fetchStatusSync(pid)
                             results.add(s)
-                            
+
                             // Detect and record state changes
                             detectAndRecordStateChange(s)
-                            
                         } catch (e: Exception) {
                             // Handle API errors gracefully
                             val errorStatus = PluginStatus(
@@ -68,7 +67,7 @@ class StatusFetcher(
                             results.add(errorStatus)
                         }
                     }
-                    
+
                     // Save history entry with duration
                     storage.getState().history.add(
                         PluginHistoryEntry(
@@ -78,10 +77,10 @@ class StatusFetcher(
                         )
                     )
                 }
-                
+
                 indicator.fraction = 1.0
                 indicator.text = "Completed"
-                
+
                 // Post notifications for interesting status changes
                 for (s in results) {
                     if (s.errorMessage != null) {
@@ -92,14 +91,14 @@ class StatusFetcher(
                         notificationHandler.notifyPluginStatusChange(s, previousStatus?.status)
                     }
                 }
-                
+
                 callback(results)
             }
         }
-        
+
         ProgressManager.getInstance().run(task)
     }
-    
+
     fun fetchAllAsync(callback: (List<PluginStatus>) -> Unit) {
         val pluginIds = storage.getState().trackedPluginIds.toList()
         if (pluginIds.isEmpty()) {
@@ -126,7 +125,7 @@ class StatusFetcher(
                         results.add(errorStatus)
                     }
                 }
-                
+
                 storage.getState().history.add(
                     PluginHistoryEntry(
                         pluginId = pid,
@@ -148,21 +147,23 @@ class StatusFetcher(
             }
         }
     }
-    
+
     /**
      * Detects if a plugin status has changed and records the phase transition
      */
     private fun detectAndRecordStateChange(newStatus: PluginStatus) {
         val state = storage.getState()
         val lastKnownStatus = state.lastKnownStatus[newStatus.pluginId]
-        
+
         if (lastKnownStatus == null || lastKnownStatus.verificationStage != newStatus.verificationStage) {
             val previousStage = lastKnownStatus?.verificationStage ?: VerificationStage.UNKNOWN
             val previousTimestamp = lastKnownStatus?.lastCheckedAt
             val durationInPreviousStage = if (previousTimestamp != null) {
                 System.currentTimeMillis() - previousTimestamp
-            } else null
-            
+            } else {
+                null
+            }
+
             val transition = PhaseTransition(
                 pluginId = newStatus.pluginId,
                 version = newStatus.latestVersion,
@@ -171,7 +172,7 @@ class StatusFetcher(
                 timestamp = System.currentTimeMillis(),
                 durationInPreviousStageMs = durationInPreviousStage
             )
-            
+
             storage.addPhaseTransition(transition)
             state.lastKnownStatus[newStatus.pluginId] = newStatus
         } else {

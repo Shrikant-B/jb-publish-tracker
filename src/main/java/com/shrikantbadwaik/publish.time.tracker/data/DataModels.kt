@@ -45,7 +45,7 @@ enum class VerificationStage {
     REJECTED,
     PUBLISHED,
     UNKNOWN;
-    
+
     companion object {
         /**
          * Infers verification stage from API response fields.
@@ -56,7 +56,7 @@ enum class VerificationStage {
             return when {
                 // If we have data from the API, the plugin has been approved
                 approve == true && listed == true -> PUBLISHED
-                approve == true && listed == false -> APPROVED  // Approved but not yet visible
+                approve == true && listed == false -> APPROVED // Approved but not yet visible
                 approve == false -> REJECTED
                 // If no approval info, assume published (most common case in API)
                 approve == null && listed == true -> PUBLISHED
@@ -68,7 +68,7 @@ enum class VerificationStage {
                 else -> UNKNOWN
             }
         }
-        
+
         fun fromString(status: String): VerificationStage {
             return when (status.lowercase()) {
                 "submitted" -> SUBMITTED
@@ -149,26 +149,26 @@ data class PluginVersionTimeline(
             "Published" to publishedAt
         )
     }
-    
+
     fun getPhaseDurations(): Map<String, Long?> {
         val durations = mutableMapOf<String, Long?>()
-        
+
         if (uploadedAt != null && verificationStartedAt != null) {
             durations["Upload to Verification"] = verificationStartedAt - uploadedAt
         }
-        
+
         if (verificationStartedAt != null && approvedAt != null) {
             durations["Verification to Approval"] = approvedAt - verificationStartedAt
         }
-        
+
         if (approvedAt != null && publishedAt != null) {
             durations["Approval to Published"] = publishedAt - approvedAt
         }
-        
+
         if (uploadedAt != null && publishedAt != null) {
             durations["Total (Upload to Published)"] = publishedAt - uploadedAt
         }
-        
+
         return durations
     }
 }

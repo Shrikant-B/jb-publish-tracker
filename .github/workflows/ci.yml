@@ -1,0 +1,225 @@
+name: CI/CD Pipeline
+
+# This workflow works for both public and private repositories.
+# For PRIVATE repos on free plan:
+#   - ✅ All build/test/quality checks run
+#   - ✅ Detekt reports uploaded as artifacts
+#   - ✅ PR comments with violations
+#   - ❌ SARIF upload to Security tab (requires GitHub Advanced Security)
+# For PUBLIC repos:
+#   - ✅ All features enabled including Security tab
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  build-and-verify:
+    name: Build and Verify
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read            # Required for checkout
+      security-events: write    # Required for SARIF upload (public repos only)
+      actions: read            # Required for workflow metadata
+      pull-requests: write     # Required for PR comments
+      checks: write            # Required for publishing test results
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Build project
+        run: ./gradlew build -x buildSearchableOptions --no-daemon
+        env:
+          GRADLE_OPTS: -Dorg.gradle.daemon=false
+      
+      - name: Run tests
+        run: ./gradlew test --no-daemon
+        env:
+          GRADLE_OPTS: -Dorg.gradle.daemon=false
+      
+      - name: Run Detekt
+        run: ./gradlew detekt --no-daemon
+        env:
+          GRADLE_OPTS: -Dorg.gradle.daemon=false
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: build/test-results/test/
+          retention-days: 7
+      
+      - name: Upload Detekt reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: detekt-reports
+          path: build/reports/detekt/
+          retention-days: 7
+      
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          check_name: Test Results
+          fail_on_failure: true
+      
+      - name: Upload SARIF to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        # Only run for public repos (Code Scanning requires GitHub Advanced Security for private repos)
+        if: always() && github.event.repository.visibility == 'public'
+        with:
+          sarif_file: build/reports/detekt/detekt.sarif
+          category: detekt
+        continue-on-error: true
+      
+      - name: Comment PR with Detekt results
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request' && always()
+        with:
+          script: |
+            const fs = require('fs');
+            const detektReport = 'build/reports/detekt/detekt.xml';
+            
+            if (fs.existsSync(detektReport)) {
+              const content = fs.readFileSync(detektReport, 'utf8');
+              const issueCount = (content.match(/<error/g) || []).length;
+              
+              const comment = `## 🔍 Detekt Analysis Results
+              
+              - **Issues found:** ${issueCount}
+              - **Report:** Check the artifacts for detailed reports
+              
+              ${issueCount > 0 ? '⚠️ Please fix the code quality issues before merging.' : '✅ No code quality issues found!'}
+              `;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Check code formatting
+        run: ./gradlew detekt --no-daemon
+      
+      - name: Verify plugin configuration
+        run: ./gradlew verifyPluginConfiguration --no-daemon
+
+  dependency-check:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Build dependencies list
+        run: ./gradlew dependencies --no-daemon > dependencies.txt
+      
+      - name: Upload dependencies list
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependencies
+          path: dependencies.txt
+          retention-days: 7
+
+  build-plugin:
+    name: Build Plugin Distribution
+    runs-on: ubuntu-latest
+    needs: [build-and-verify, code-quality]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Build plugin
+        run: ./gradlew buildPlugin --no-daemon
+      
+      - name: Upload plugin distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-distribution
+          path: build/distributions/*.zip
+          retention-days: 30
+      
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(grep "version" build.gradle.kts | head -1 | cut -d'"' -f2)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+      
+      - name: Create Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/distributions/*.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

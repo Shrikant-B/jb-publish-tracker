@@ -86,7 +86,8 @@ class PluginStatusToolWindowFactory : ToolWindowFactory {
         refreshBtn.addActionListener {
             refreshBtn.isEnabled = false
             repo.fetchAllAsync {
-                populate(it.map { s ->
+                populate(
+                    it.map { s ->
                     arrayOf(
                         s.displayName,
                         s.pluginId,
@@ -94,7 +95,8 @@ class PluginStatusToolWindowFactory : ToolWindowFactory {
                         s.status,
                         Date(s.lastCheckedAt)
                     )
-                })
+                }
+                )
                 refreshBtn.isEnabled = true
             }
         }
@@ -116,7 +118,8 @@ class PluginStatusToolWindowFactory : ToolWindowFactory {
                 println("[MarketplaceApi] Triggered at ${Date()}")
                 repo.fetchAllAsync {
                     println("[MarketplaceApi] Received ${it.size} plugin statuses")
-                    populate(it.map { s ->
+                    populate(
+                        it.map { s ->
                         arrayOf(
                             s.displayName,
                             s.pluginId,
@@ -124,7 +127,8 @@ class PluginStatusToolWindowFactory : ToolWindowFactory {
                             s.status,
                             Date(s.lastCheckedAt)
                         )
-                    })
+                    }
+                    )
                 }
             }, 0, 10, TimeUnit.MINUTES)
 

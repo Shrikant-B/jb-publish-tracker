@@ -47,16 +47,16 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
         state.history.add(entry)
         cleanupOldHistory()
     }
-    
+
     fun addVerificationHistory(entry: VerificationHistory) {
         state.verificationHistory.add(entry)
         cleanupOldVerificationHistory()
     }
-    
+
     fun cleanupOldHistory() {
         val cutoffTime = System.currentTimeMillis() - (state.settings.dataRetentionDays * 24 * 60 * 60 * 1000L)
         state.history.removeAll { it.timestamp < cutoffTime }
-        
+
         // Also limit by max entries
         if (state.history.size > state.settings.maxHistoryEntries) {
             val sortedHistory = state.history.sortedBy { it.timestamp }
@@ -64,12 +64,12 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
             state.history.addAll(sortedHistory.takeLast(state.settings.maxHistoryEntries))
         }
     }
-    
+
     fun cleanupOldVerificationHistory() {
         val cutoffTime = System.currentTimeMillis() - (state.settings.dataRetentionDays * 24 * 60 * 60 * 1000L)
         state.verificationHistory.removeAll { it.submittedAt < cutoffTime }
     }
-    
+
     fun exportHistory(): String {
         val historyJson = buildString {
             appendLine("{")
@@ -99,26 +99,26 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
         }
         return historyJson
     }
-    
+
     fun clearAllHistory() {
         state.history.clear()
         state.verificationHistory.clear()
     }
-    
+
     fun getHistoryForPlugin(pluginId: String): List<PluginHistoryEntry> {
         return state.history.filter { it.pluginId == pluginId }
     }
-    
+
     fun getVerificationHistoryForPlugin(pluginId: String): List<VerificationHistory> {
         return state.verificationHistory.filter { it.pluginId == pluginId }
     }
-    
+
     // Phase transition tracking methods
     fun addPhaseTransition(transition: PhaseTransition) {
         state.phaseTransitions.add(transition)
         cleanupOldPhaseTransitions()
     }
-    
+
     fun getPhaseTransitionsForPlugin(pluginId: String, version: String? = null): List<PhaseTransition> {
         return if (version != null) {
             state.phaseTransitions.filter { it.pluginId == pluginId && it.version == version }
@@ -126,16 +126,16 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
             state.phaseTransitions.filter { it.pluginId == pluginId }
         }
     }
-    
+
     fun buildTimeline(pluginId: String, version: String): PluginVersionTimeline? {
         val transitions = getPhaseTransitionsForPlugin(pluginId, version).sortedBy { it.timestamp }
         if (transitions.isEmpty()) return null
-        
+
         var uploadedAt: Long? = null
         var verificationStartedAt: Long? = null
         var approvedAt: Long? = null
         var publishedAt: Long? = null
-        
+
         for (transition in transitions) {
             when (transition.toStage) {
                 VerificationStage.SUBMITTED -> uploadedAt = transition.timestamp
@@ -145,14 +145,16 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
                 else -> {}
             }
         }
-        
+
         val currentStage = transitions.lastOrNull()?.toStage ?: VerificationStage.UNKNOWN
         val firstTimestamp = transitions.firstOrNull()?.timestamp
         val lastTimestamp = transitions.lastOrNull()?.timestamp
         val totalDuration = if (firstTimestamp != null && lastTimestamp != null) {
             lastTimestamp - firstTimestamp
-        } else null
-        
+        } else {
+            null
+        }
+
         return PluginVersionTimeline(
             pluginId = pluginId,
             version = version,
@@ -165,25 +167,25 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
             totalDurationMs = totalDuration
         )
     }
-    
+
     fun getAveragePhaseDurations(pluginId: String? = null): Map<String, Long> {
         val relevantTransitions = if (pluginId != null) {
             state.phaseTransitions.filter { it.pluginId == pluginId }
         } else {
             state.phaseTransitions
         }
-        
+
         // Group by version to get complete timelines
         val byVersion = relevantTransitions.groupBy { "${it.pluginId}:${it.version}" }
-        
+
         val allDurations = mutableMapOf<String, MutableList<Long>>()
-        
+
         byVersion.values.forEach { versionTransitions ->
             val sorted = versionTransitions.sortedBy { it.timestamp }
             var uploadTime: Long? = null
             var verificationTime: Long? = null
             var approvalTime: Long? = null
-            
+
             sorted.forEach { transition ->
                 when (transition.toStage) {
                     VerificationStage.SUBMITTED -> uploadTime = transition.timestamp
@@ -216,18 +218,20 @@ class PublishTrackerStorage : PersistentStateComponent<PublishTrackerState> {
                 }
             }
         }
-        
+
         return allDurations.mapValues { (_, durations) ->
             if (durations.isEmpty()) 0L else durations.average().toLong()
         }
     }
-    
+
     private fun cleanupOldPhaseTransitions() {
         val cutoffTime = System.currentTimeMillis() - (state.settings.dataRetentionDays * 24 * 60 * 60 * 1000L)
         state.phaseTransitions.removeAll { it.timestamp < cutoffTime }
     }
 
     companion object {
-        fun getInstance(): PublishTrackerStorage = ApplicationManager.getApplication().getService(PublishTrackerStorage::class.java)
+        fun getInstance(): PublishTrackerStorage = ApplicationManager.getApplication().getService(
+            PublishTrackerStorage::class.java
+        )
     }
 }

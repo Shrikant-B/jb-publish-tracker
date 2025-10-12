@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:SettingsPanel.kt$SettingsPanel$(it)</ID>
+    <ID>ArgumentListWrapping:SettingsPanel.kt$SettingsPanel$(panel, "Enter Plugin ID:", "Add Plugin", JOptionPane.QUESTION_MESSAGE)</ID>
+    <ID>ArgumentListWrapping:SettingsPanel.kt$SettingsPanel$(panel, "Settings exported successfully!", "Export", JOptionPane.INFORMATION_MESSAGE)</ID>
+    <ID>ArgumentListWrapping:SettingsPanel.kt$SettingsPanel$(panel, "Settings import functionality would be implemented here", "Import", JOptionPane.INFORMATION_MESSAGE)</ID>
+    <ID>ArgumentListWrapping:Storage.kt$PublishTrackerStorage.Companion$(PublishTrackerStorage::class.java)</ID>
+    <ID>CyclomaticComplexMethod:DataModels.kt$VerificationStage.Companion$fun fromApiStatus(status: String?, approve: Boolean?, listed: Boolean?): VerificationStage</ID>
+    <ID>FinalNewline:AnalyticsCalculator.kt$com.shrikantbadwaik.publish.time.tracker.domain.AnalyticsCalculator.kt</ID>
+    <ID>FinalNewline:DataModels.kt$com.shrikantbadwaik.publish.time.tracker.data.DataModels.kt</ID>
+    <ID>FinalNewline:MarketplaceApi.kt$com.shrikantbadwaik.publish.time.tracker.data.api.MarketplaceApi.kt</ID>
+    <ID>FinalNewline:MarketplaceApiModule.kt$com.shrikantbadwaik.publish.time.tracker.data.api.di.MarketplaceApiModule.kt</ID>
+    <ID>FinalNewline:PluginStatusToolWindowFactory.kt$com.shrikantbadwaik.publish.time.tracker.ui.PluginStatusToolWindowFactory.kt</ID>
+    <ID>FinalNewline:PublishSettingsConfigurable.kt$com.shrikantbadwaik.publish.time.tracker.settings.PublishSettingsConfigurable.kt</ID>
+    <ID>FinalNewline:RepoModule.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.di.RepoModule.kt</ID>
+    <ID>FinalNewline:Repository.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.Repository.kt</ID>
+    <ID>FinalNewline:StatusFetcher.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.worker.StatusFetcher.kt</ID>
+    <ID>FinalNewline:Storage.kt$com.shrikantbadwaik.publish.time.tracker.data.Storage.kt</ID>
+    <ID>ImplicitDefaultLocale:ChartsPanel.kt$ChartsPanel$String.format("%.1f", metrics.successRate * 100)</ID>
+    <ID>InvalidPackageDeclaration:AnalyticsCalculator.kt$package com.shrikantbadwaik.publish.time.tracker.domain</ID>
+    <ID>InvalidPackageDeclaration:ChartsPanel.kt$package com.shrikantbadwaik.publish.time.tracker.ui</ID>
+    <ID>InvalidPackageDeclaration:DataModels.kt$package com.shrikantbadwaik.publish.time.tracker.data</ID>
+    <ID>InvalidPackageDeclaration:MarketplaceApi.kt$package com.shrikantbadwaik.publish.time.tracker.data.api</ID>
+    <ID>InvalidPackageDeclaration:MarketplaceApiModule.kt$package com.shrikantbadwaik.publish.time.tracker.data.api.di</ID>
+    <ID>InvalidPackageDeclaration:NotificationHandler.kt$package com.shrikantbadwaik.publish.time.tracker.data.repo.worker</ID>
+    <ID>InvalidPackageDeclaration:PluginStatusToolWindowFactory.kt$package com.shrikantbadwaik.publish.time.tracker.ui</ID>
+    <ID>InvalidPackageDeclaration:PublishSettingsConfigurable.kt$package com.shrikantbadwaik.publish.time.tracker.settings</ID>
+    <ID>InvalidPackageDeclaration:RepoModule.kt$package com.shrikantbadwaik.publish.time.tracker.data.repo.di</ID>
+    <ID>InvalidPackageDeclaration:Repository.kt$package com.shrikantbadwaik.publish.time.tracker.data.repo</ID>
+    <ID>InvalidPackageDeclaration:SettingsPanel.kt$package com.shrikantbadwaik.publish.time.tracker.ui</ID>
+    <ID>InvalidPackageDeclaration:StatusFetcher.kt$package com.shrikantbadwaik.publish.time.tracker.data.repo.worker</ID>
+    <ID>InvalidPackageDeclaration:Storage.kt$package com.shrikantbadwaik.publish.time.tracker.data</ID>
+    <ID>InvalidPackageDeclaration:TimelinePanel.kt$package com.shrikantbadwaik.publish.time.tracker.ui</ID>
+    <ID>LongMethod:PluginStatusToolWindowFactory.kt$PluginStatusToolWindowFactory$private fun setupStatusDashboardListeners( panel: JBPanel&lt;JBPanel&lt;*&gt;&gt;, project: Project, tableModel: DefaultTableModel, refreshBtn: JButton, startBtn: JButton, stopBtn: JButton )</ID>
+    <ID>LongMethod:SettingsPanel.kt$SettingsPanel$private fun setupUI()</ID>
+    <ID>LongParameterList:PluginStatusToolWindowFactory.kt$PluginStatusToolWindowFactory$( panel: JBPanel&lt;JBPanel&lt;*&gt;&gt;, project: Project, tableModel: DefaultTableModel, refreshBtn: JButton, startBtn: JButton, stopBtn: JButton )</ID>
+    <ID>MagicNumber:AnalyticsCalculator.kt$AnalyticsCalculator$1000L</ID>
+    <ID>MagicNumber:AnalyticsCalculator.kt$AnalyticsCalculator$24</ID>
+    <ID>MagicNumber:AnalyticsCalculator.kt$AnalyticsCalculator$3</ID>
+    <ID>MagicNumber:AnalyticsCalculator.kt$AnalyticsCalculator$5</ID>
+    <ID>MagicNumber:AnalyticsCalculator.kt$AnalyticsCalculator$60</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$10</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$100</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$1000</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$1000.0</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$16f</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$24</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$30</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$300</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$400</ID>
+    <ID>MagicNumber:ChartsPanel.kt$ChartsPanel$60</ID>
+    <ID>MagicNumber:PluginStatusToolWindowFactory.kt$PluginStatusToolWindowFactory$10</ID>
+    <ID>MagicNumber:PublishSettingsConfigurable.kt$PublishSettingsConfigurable$8</ID>
+    <ID>MagicNumber:SettingsPanel.kt$SettingsPanel$10</ID>
+    <ID>MagicNumber:SettingsPanel.kt$SettingsPanel$3</ID>
+    <ID>MagicNumber:SettingsPanel.kt$SettingsPanel$5</ID>
+    <ID>MagicNumber:Storage.kt$PublishTrackerStorage$1000L</ID>
+    <ID>MagicNumber:Storage.kt$PublishTrackerStorage$24</ID>
+    <ID>MagicNumber:Storage.kt$PublishTrackerStorage$60</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$10</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$1000</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$150</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$16f</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$20</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$24</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$5</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$60</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel$600</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$100</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$12</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$15</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$150</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$152</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$16</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$175</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$243</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$244</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$255</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$30</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$33</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$40</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$5</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$50</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$54</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$6</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$600</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$67</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$76</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$8</ID>
+    <ID>MagicNumber:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$80</ID>
+    <ID>MaxLineLength:NotificationHandler.kt$NotificationHandler$VerificationStage.UNKNOWN -&gt; if (pluginStatus.errorMessage != null) "Plugin Error" else "Plugin Status Update"</ID>
+    <ID>MaxLineLength:NotificationHandler.kt$NotificationHandler$VerificationStage.UNKNOWN -&gt; if (pluginStatus.errorMessage != null) NotificationType.ERROR else NotificationType.INFORMATION</ID>
+    <ID>MaxLineLength:SettingsPanel.kt$SettingsPanel$JOptionPane.showMessageDialog(panel, "Settings exported successfully!", "Export", JOptionPane.INFORMATION_MESSAGE)</ID>
+    <ID>MaxLineLength:SettingsPanel.kt$SettingsPanel$JOptionPane.showMessageDialog(panel, "Settings import functionality would be implemented here", "Import", JOptionPane.INFORMATION_MESSAGE)</ID>
+    <ID>MaxLineLength:SettingsPanel.kt$SettingsPanel$state.trackedPluginIds = (0 until pluginsList.model.size).map { pluginsList.model.getElementAt(it) }.toMutableList()</ID>
+    <ID>MaxLineLength:SettingsPanel.kt$SettingsPanel$val currentList = (0 until pluginsList.model.size).map { pluginsList.model.getElementAt(it) }.toMutableList()</ID>
+    <ID>MaxLineLength:SettingsPanel.kt$SettingsPanel$val pluginId = JOptionPane.showInputDialog(panel, "Enter Plugin ID:", "Add Plugin", JOptionPane.QUESTION_MESSAGE)</ID>
+    <ID>MaxLineLength:Storage.kt$PublishTrackerStorage.Companion$fun getInstance(): PublishTrackerStorage</ID>
+    <ID>MaximumLineLength:NotificationHandler.kt$NotificationHandler$ </ID>
+    <ID>MaximumLineLength:SettingsPanel.kt$SettingsPanel$ </ID>
+    <ID>MaximumLineLength:Storage.kt$PublishTrackerStorage.Companion$ </ID>
+    <ID>MultiLineIfElse:AnalyticsCalculator.kt$AnalyticsCalculator$0.0</ID>
+    <ID>MultiLineIfElse:AnalyticsCalculator.kt$AnalyticsCalculator$0L</ID>
+    <ID>MultiLineIfElse:StatusFetcher.kt$StatusFetcher$null</ID>
+    <ID>MultiLineIfElse:Storage.kt$PublishTrackerStorage$null</ID>
+    <ID>NestedBlockDepth:Storage.kt$PublishTrackerStorage$fun getAveragePhaseDurations(pluginId: String? = null): Map&lt;String, Long&gt;</ID>
+    <ID>NewLineAtEndOfFile:AnalyticsCalculator.kt$com.shrikantbadwaik.publish.time.tracker.domain.AnalyticsCalculator.kt</ID>
+    <ID>NewLineAtEndOfFile:DataModels.kt$com.shrikantbadwaik.publish.time.tracker.data.DataModels.kt</ID>
+    <ID>NewLineAtEndOfFile:MarketplaceApi.kt$com.shrikantbadwaik.publish.time.tracker.data.api.MarketplaceApi.kt</ID>
+    <ID>NewLineAtEndOfFile:MarketplaceApiModule.kt$com.shrikantbadwaik.publish.time.tracker.data.api.di.MarketplaceApiModule.kt</ID>
+    <ID>NewLineAtEndOfFile:PluginStatusToolWindowFactory.kt$com.shrikantbadwaik.publish.time.tracker.ui.PluginStatusToolWindowFactory.kt</ID>
+    <ID>NewLineAtEndOfFile:PublishSettingsConfigurable.kt$com.shrikantbadwaik.publish.time.tracker.settings.PublishSettingsConfigurable.kt</ID>
+    <ID>NewLineAtEndOfFile:RepoModule.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.di.RepoModule.kt</ID>
+    <ID>NewLineAtEndOfFile:Repository.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.Repository.kt</ID>
+    <ID>NewLineAtEndOfFile:StatusFetcher.kt$com.shrikantbadwaik.publish.time.tracker.data.repo.worker.StatusFetcher.kt</ID>
+    <ID>NewLineAtEndOfFile:Storage.kt$com.shrikantbadwaik.publish.time.tracker.data.Storage.kt</ID>
+    <ID>NoBlankLineBeforeRbrace:StatusFetcher.kt$StatusFetcher.&lt;no name provided&gt;$ </ID>
+    <ID>NoConsecutiveBlankLines:AnalyticsCalculatorTest.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:DataModelsTest.kt$ </ID>
+    <ID>NoConsecutiveBlankLines:TimelinePanel.kt$ </ID>
+    <ID>NoMultipleSpaces:ChartsPanel.kt$ChartsPanel$ </ID>
+    <ID>NoMultipleSpaces:DataModels.kt$VerificationStage.Companion$ </ID>
+    <ID>NoTrailingSpaces:AnalyticsCalculator.kt$AnalyticsCalculator$ </ID>
+    <ID>NoTrailingSpaces:AnalyticsCalculatorTest.kt$AnalyticsCalculatorTest$ </ID>
+    <ID>NoTrailingSpaces:ChartsPanel.kt$ChartsPanel$ </ID>
+    <ID>NoTrailingSpaces:DataModels.kt$PluginVersionTimeline$ </ID>
+    <ID>NoTrailingSpaces:DataModels.kt$VerificationStage$ </ID>
+    <ID>NoTrailingSpaces:DataModels.kt$VerificationStage.Companion$ </ID>
+    <ID>NoTrailingSpaces:MarketplaceApi.kt$MarketplaceApiImpl$ </ID>
+    <ID>NoTrailingSpaces:NotificationHandler.kt$NotificationHandler$ </ID>
+    <ID>NoTrailingSpaces:Repository.kt$RepositoryImpl$ </ID>
+    <ID>NoTrailingSpaces:SettingsPanel.kt$SettingsPanel$ </ID>
+    <ID>NoTrailingSpaces:StatusFetcher.kt$StatusFetcher$ </ID>
+    <ID>NoTrailingSpaces:StatusFetcher.kt$StatusFetcher.&lt;no name provided&gt;$ </ID>
+    <ID>NoTrailingSpaces:Storage.kt$PublishTrackerStorage$ </ID>
+    <ID>NoTrailingSpaces:TimelinePanel.kt$TimelinePanel$ </ID>
+    <ID>NoTrailingSpaces:TimelinePanel.kt$TimelinePanel.&lt;no name provided&gt;$ </ID>
+    <ID>NoWildcardImports:AnalyticsCalculatorTest.kt$import org.junit.jupiter.api.Assertions.*</ID>
+    <ID>NoWildcardImports:DataModelsTest.kt$import org.junit.jupiter.api.Assertions.*</ID>
+    <ID>NoWildcardImports:Repository.kt$import kotlinx.coroutines.*</ID>
+    <ID>NoWildcardImports:SettingsPanel.kt$import javax.swing.*</ID>
+    <ID>NoWildcardImports:StatusFetcher.kt$import kotlinx.coroutines.*</ID>
+    <ID>ReturnCount:NotificationHandler.kt$NotificationHandler$private fun shouldNotify(pluginStatus: PluginStatus, previousStatus: String?): Boolean</ID>
+    <ID>SpacingAroundColon:PublishSettingsConfigurable.kt$PublishSettingsConfigurable$:</ID>
+    <ID>TooGenericExceptionCaught:Repository.kt$RepositoryImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:StatusFetcher.kt$StatusFetcher$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:StatusFetcher.kt$StatusFetcher.&lt;no name provided&gt;$e: Exception</ID>
+    <ID>TooManyFunctions:Storage.kt$PublishTrackerStorage : PersistentStateComponent</ID>
+    <ID>UnusedParameter:PluginStatusToolWindowFactory.kt$PluginStatusToolWindowFactory$panel: JBPanel&lt;JBPanel&lt;*&gt;&gt;</ID>
+    <ID>UnusedPrivateProperty:NotificationHandler.kt$NotificationHandler$private val storage = PublishTrackerStorage.getInstance()</ID>
+    <ID>UnusedPrivateProperty:SettingsPanel.kt$SettingsPanel$val settings = mapOf( "apiToken" to tokenField.text, "pluginIds" to (0 until pluginsList.model.size).map { pluginsList.model.getElementAt(it) }, "pollingInterval" to pollingIntervalCombo.selectedItem, "notificationType" to notificationTypeCombo.selectedItem, "enableNotifications" to enableNotificationsCheckbox.isSelected, "enableAutoPoll" to enableAutoPollCheckbox.isSelected, "enableEmailNotifications" to enableEmailNotificationsCheckbox.isSelected, "email" to emailField.text, "dataRetentionDays" to dataRetentionDaysField.text )</ID>
+    <ID>WildcardImport:AnalyticsCalculatorTest.kt$import org.junit.jupiter.api.Assertions.*</ID>
+    <ID>WildcardImport:DataModelsTest.kt$import org.junit.jupiter.api.Assertions.*</ID>
+    <ID>WildcardImport:Repository.kt$import kotlinx.coroutines.*</ID>
+    <ID>WildcardImport:SettingsPanel.kt$import javax.swing.*</ID>
+    <ID>WildcardImport:StatusFetcher.kt$import kotlinx.coroutines.*</ID>
+    <ID>Wrapping:ChartsPanel.kt$ChartsPanel$(</ID>
+    <ID>Wrapping:PluginStatusToolWindowFactory.kt$PluginStatusToolWindowFactory$(</ID>
+    <ID>Wrapping:TimelinePanel.kt$TimelinePanel$(</ID>
+  </CurrentIssues>
+</SmellBaseline>
