@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>com.shrikantbadwaik.jb-publish-tracker</id>
+    <name>Publish/Verify Tracker</name>
+    <version>0.1.0</version>
+    <vendor email="shrikant.badwaik@gmail.com">Shrikant Badwaik</vendor>
+
+    <description>
+        Tracks JetBrains Marketplace plugin verification &amp; publish status.
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Tool window registration -->
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Publish Tracker"
+                    anchor="right"
+                    factoryClass="com.shrikantbadwaik.publish.time.tracker.ui.PluginStatusToolWindowFactory"/>
+        
+        <!-- Notification group registration -->
+        <notificationGroup id="PublishTracker" displayType="BALLOON" isLogByDefault="true"/>
+        
+        <!-- Settings / Preferences page -->
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.shrikantbadwaik.publish.time.tracker.ui.SettingsPanel"
+                id="com.shrikantbadwaik.publish.time.tracker.settings"
+                displayName="Publish Tracker Settings"/>
+    </extensions>
+
+    <projectListeners>
+        <!-- optional startup tasks -->
+    </projectListeners>
+
+    <actions>
+        <!-- Optionally add actions here -->
+    </actions>
+</idea-plugin>
