@@ -30,13 +30,13 @@ Plugin developers currently have to:
 - Manual refresh and auto-polling (configurable interval)
 - Color-coded status indicators
 
-### 📈 Analytics & Charts
+### 📈 Analytics & Charts - (Under Development)
 - **Analytics Tab**: Visual charts powered by JFreeChart
 - Bar chart showing average phase durations (Upload→Verification→Approval→Published)
 - Time series chart of submission trends (last 30 days)
 - Plugin performance metrics table
 
-### ⏱️ Phase Timeline Tracking
+### ⏱️ Phase Timeline Tracking - (Under Development)
 - **Timeline Tab**: Detailed phase-by-phase visualization
 - Visual timeline showing progress through each stage
 - Automatic detection of state transitions
@@ -123,56 +123,6 @@ Since the API only returns approved plugins, the plugin uses this strategy:
 
 > **💡 Tip**: For accurate verification time tracking, enable auto-polling **before** submitting a new version. The plugin will detect when your submission is approved by noticing the new version appear in the API.
 
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────┐
-│                   UI Layer                      │
-│  - PluginStatusToolWindowFactory (3 tabs)      │
-│  - TimelinePanel (phase visualization)         │
-│  - ChartsPanel (analytics with JFreeChart)     │
-│  - SettingsPanel (configuration)               │
-└─────────────────────────────────────────────────┘
-                      ↓
-┌─────────────────────────────────────────────────┐
-│                 Domain Layer                    │
-│  - AnalyticsCalculator (metrics)               │
-│  - VerificationStage (state machine)           │
-│  - PhaseTransition (state tracking)            │
-└─────────────────────────────────────────────────┘
-                      ↓
-┌─────────────────────────────────────────────────┐
-│                  Data Layer                     │
-│  - Repository: Fetches plugin status           │
-│  - MarketplaceApi: HTTP client (Ktor)          │
-│  - Storage: Persistent state (XML-based)       │
-│  - StatusFetcher: Background worker            │
-└─────────────────────────────────────────────────┘
-```
-
-## 🛠️ Technology Stack
-
-- **Language**: Kotlin 1.9.0
-- **Platform**: IntelliJ Platform SDK 2023.3
-- **HTTP Client**: Ktor 3.0.0 with OkHttp engine
-- **Serialization**: kotlinx-serialization-json 1.6.0
-- **Charts**: JFreeChart 1.5.4
-- **Concurrency**: Kotlin Coroutines 1.7.3
-- **UI**: Swing (IntelliJ UI components)
-- **Build**: Gradle 8.x with Kotlin DSL
-- **JVM**: Java 17
-
-## 📦 Dependencies
-
-```kotlin
-implementation("io.ktor:ktor-client-okhttp:3.0.0")
-implementation("io.ktor:ktor-client-content-negotiation:3.0.0")
-implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0")
-implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-implementation("org.jfree:jfreechart:1.5.4")
-```
-
 ## 🔒 Privacy & Security
 
 - API tokens are stored securely using IntelliJ's persistent storage
@@ -192,30 +142,6 @@ The plugin stores data in:
   - Settings/preferences
 
 ## 📝 Development
-
-### Project Structure
-
-```
-src/main/java/com/shrikantbadwaik/publish.time.tracker/
-├── data/
-│   ├── api/
-│   │   ├── MarketplaceApi.kt          # API client
-│   │   └── di/MarketplaceApiModule.kt # DI module
-│   ├── repo/
-│   │   ├── Repository.kt              # Data repository
-│   │   ├── worker/StatusFetcher.kt    # Background tasks
-│   │   └── di/RepoModule.kt           # DI module
-│   ├── DataModels.kt                  # Data classes
-│   └── Storage.kt                     # Persistence layer
-├── domain/
-│   └── AnalyticsCalculator.kt         # Business logic
-├── ui/
-│   ├── PluginStatusToolWindowFactory.kt # Main tool window
-│   ├── TimelinePanel.kt               # Timeline visualization
-│   ├── ChartsPanel.kt                 # Analytics charts
-│   └── SettingsPanel.kt               # Settings UI
-└── PluginEntry.kt                     # Entry point
-```
 
 ### Running Tests
 
@@ -267,7 +193,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 **Shrikant Badwaik**
 - Email: shrikant.badwaik@gmail.com
-- Plugin: [JetBrains Publish Tracker](https://plugins.jetbrains.com/)
 
 ## 🙏 Acknowledgments
 
@@ -291,3 +216,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 **Made with ❤️ for JetBrains Plugin Developers**
+- Support my work! [Ko-fi me](https://ko-fi.com/shrikant007)**
