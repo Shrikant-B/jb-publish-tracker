@@ -32,6 +32,9 @@ replay_pid*
 build/
 bin/
 
+# Gradle properties (may contain sensitive tokens)
+gradle.properties
+
 # Test reports
 *.html
 *.xml

@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.shrikantbadwaik"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
@@ -44,9 +44,43 @@ intellij {
 }
 
 tasks {
-    // Optional: patch plugin.xml version from Gradle
+    // Patch plugin.xml with version and change notes from Gradle
     withType<PatchPluginXmlTask> {
-        changeNotes.set("Initial release")
+        version.set(project.version.toString())
+        sinceBuild.set("233")  // 2023.3
+        untilBuild.set("243.*")  // 2024.3.*
+        
+        changeNotes.set("""
+            <h2>v1.0.0 - Initial Release</h2>
+            <ul>
+                <li><b>Real-time Tracking:</b> Monitor JetBrains Marketplace plugin verification status</li>
+                <li><b>Phase Timeline:</b> Track verification phases with detailed timestamps</li>
+                <li><b>Visual Analytics:</b> Charts showing submission trends and average durations</li>
+                <li><b>Smart Notifications:</b> Get notified when plugin status changes</li>
+                <li><b>Auto-polling:</b> Configurable automatic status checks</li>
+                <li><b>Multi-plugin Support:</b> Track multiple plugins simultaneously</li>
+            </ul>
+        """.trimIndent())
+    }
+    
+    // Publishing to JetBrains Marketplace
+    publishPlugin {
+        // Token is read from environment variable or gradle.properties
+        token.set(System.getenv("JETBRAINS_MARKETPLACE_TOKEN") 
+            ?: providers.gradleProperty("jetbrainsMarketplaceToken").orNull)
+        
+        // Specify release channels (default is 'default' which is stable)
+        channels.set(listOf("default"))
+    }
+    
+    // Sign plugin for publishing (optional but recommended)
+    signPlugin {
+        certificateChain.set(System.getenv("CERTIFICATE_CHAIN") 
+            ?: providers.gradleProperty("certificateChain").orNull)
+        privateKey.set(System.getenv("PRIVATE_KEY") 
+            ?: providers.gradleProperty("privateKey").orNull)
+        password.set(System.getenv("PRIVATE_KEY_PASSWORD") 
+            ?: providers.gradleProperty("privateKeyPassword").orNull)
     }
 }
 

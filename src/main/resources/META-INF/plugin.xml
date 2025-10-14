@@ -2,11 +2,39 @@
     <id>com.shrikantbadwaik.jb-publish-tracker</id>
     <name>Publish/Verify Tracker</name>
     <version>0.1.0</version>
-    <vendor email="shrikant.badwaik@gmail.com">Shrikant Badwaik</vendor>
+    <vendor email="shrikant.badwaik@gmail.com" url="https://github.com/shrikantbadwaik/jb-publish-tracker">Shrikant Badwaik</vendor>
 
-    <description>
-        Tracks JetBrains Marketplace plugin verification &amp; publish status.
-    </description>
+    <description><![CDATA[
+        <h1>JetBrains Plugin Publish Tracker</h1>
+        <p>
+            A comprehensive tool for plugin developers to monitor and track the verification and publishing 
+            status of their plugins on the JetBrains Marketplace.
+        </p>
+        
+        <h2>Features</h2>
+        <ul>
+            <li><b>Real-time Status Tracking:</b> Monitor your plugin's verification status directly from IntelliJ IDEA</li>
+            <li><b>Phase-by-Phase Timeline:</b> Visualize the entire verification lifecycle with timestamps</li>
+            <li><b>Analytics Dashboard:</b> View submission trends, average durations, and success rates with interactive charts</li>
+            <li><b>Smart Notifications:</b> Get instant alerts when your plugin status changes</li>
+            <li><b>Auto-polling:</b> Configurable automatic status checks (every 1-60 minutes)</li>
+            <li><b>Multi-plugin Support:</b> Track multiple plugins simultaneously from one dashboard</li>
+            <li><b>Historical Data:</b> Keep track of all your plugin submissions and their outcomes</li>
+        </ul>
+        
+        <h2>How to Use</h2>
+        <ol>
+            <li>Open the <b>Publish Tracker</b> tool window (View → Tool Windows → Publish Tracker)</li>
+            <li>Configure your JetBrains Marketplace API token in <b>Settings → Tools → Publish Tracker Settings</b></li>
+            <li>Add your plugin IDs to track</li>
+            <li>Start monitoring and get real-time updates!</li>
+        </ol>
+        
+        <p>
+            <b>Note:</b> This plugin requires a JetBrains Marketplace API token for authentication. 
+            Get yours from <a href="https://plugins.jetbrains.com/author/me/tokens">JetBrains Marketplace</a>.
+        </p>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
