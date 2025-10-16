@@ -5,9 +5,9 @@
     <vendor email="shrikant.badwaik@gmail.com" url="https://github.com/shrikantbadwaik/jb-publish-tracker">Shrikant Badwaik</vendor>
 
     <description><![CDATA[
-        <h1>JetBrains Plugin Publish Tracker</h1>
+        <h1>Publish Tracker plugin for JetBrains IDEs</h1>
         <p>
-            A comprehensive tool for plugin developers to monitor and track the verification and publishing 
+            A comprehensive tool for plugin developers to monitor and track the verification and publishing
             status of their plugins on the JetBrains Marketplace.
         </p>
         
@@ -15,7 +15,6 @@
         <ul>
             <li><b>Real-time Status Tracking:</b> Monitor your plugin's verification status directly from IntelliJ IDEA</li>
             <li><b>Phase-by-Phase Timeline:</b> Visualize the entire verification lifecycle with timestamps</li>
-            <li><b>Analytics Dashboard:</b> View submission trends, average durations, and success rates with interactive charts</li>
             <li><b>Smart Notifications:</b> Get instant alerts when your plugin status changes</li>
             <li><b>Auto-polling:</b> Configurable automatic status checks (every 1-60 minutes)</li>
             <li><b>Multi-plugin Support:</b> Track multiple plugins simultaneously from one dashboard</li>
